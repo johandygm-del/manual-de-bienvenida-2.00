@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Proyecto HUELLA · Presentación a la directiva</title>
+<meta name="theme-color" content="#1b1b1b">
+<style>@font-face{font-family:'Chunk';src:url(assets/Chunk.woff) format('woff');font-weight:400;font-display:swap}
+@font-face{font-family:'Gotham';src:url(assets/GothamBook.woff) format('woff');font-weight:400;font-display:swap}
+@font-face{font-family:'Gotham';src:url(assets/Gotham.woff) format('woff');font-weight:900;font-display:swap}
+:root{--cy:#00abe1;--bl:#0070e2;--pu:#7000e2;--gr:#01be7d;--ink:#1b1b1b;--bg:#f3f9fd}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#0b0d10;overflow:hidden;font-family:'Gotham',Montserrat,Arial,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1334px;height:750px;transform-origin:0 0;background:var(--ink);overflow:hidden}
+.slide{position:absolute;inset:0;padding:90px 89px 0;visibility:hidden;opacity:0;transition:opacity .45s,visibility 0s .45s;overflow:hidden;color:var(--ink)}
+.slide.on{visibility:visible;opacity:1;transition:opacity .45s}
+.light{background:var(--bg)}
+.dark{background:var(--ink);color:#fff}
+.cyan{background:var(--cy)}
+.dark::before{content:"";position:absolute;width:1000px;height:1000px;border-radius:50%;right:-320px;top:-260px;background:radial-gradient(circle,rgba(0,112,226,.42),rgba(0,171,225,.12) 45%,transparent 68%);animation:drift 14s ease-in-out infinite alternate;pointer-events:none}
+.dark.s1::before{right:-120px;top:-120px;width:1200px;height:1200px}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(-60px,50px) scale(1.12)}}
+.slide>*{position:relative}
+/* tipografía */
+.eb{font-weight:900;font-size:16px;letter-spacing:.26em;color:var(--bl)}
+.dark .eb{color:var(--cy)}.cyan .eb{color:var(--ink)}
+h2{font-family:'Chunk',Georgia,serif;font-weight:400;font-size:40px;line-height:1.1;margin:14px 0 24px;letter-spacing:-.005em}
+h3{font-weight:900;font-size:23px;margin:0 0 6px;line-height:1.2}
+h4{font-weight:900;font-size:20px;margin:0 0 4px;line-height:1.2}
+p{margin:0;font-size:19px;line-height:1.4}
+b.c,.c{color:var(--cy)}.b{color:var(--bl)}
+b{font-weight:900}
+.lb,.lbl{font-weight:900;font-size:15px;letter-spacing:.24em;display:block}
+.lbl{color:rgba(255,255,255,.55);margin:0 0 12px;font-size:14px}
+.lbl.ink{color:var(--ink);margin-top:0;background:none}
+.txt{font-size:19px;color:#4b5a66;margin-top:22px;max-width:1156px}
+.txt.dim{color:rgba(255,255,255,.6)}
+/* animaciones de entrada */
+@keyframes in{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes inl{from{opacity:0;transform:translateX(-46px)}to{opacity:1;transform:none}}
+@keyframes inr{from{opacity:0;transform:translateX(46px)}to{opacity:1;transform:none}}
+@keyframes inz{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
+@keyframes inu{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes ring{0%{transform:scale(.62);opacity:.9}100%{transform:scale(1.5);opacity:0}}
+@keyframes float{from{transform:translateY(0)}to{transform:translateY(-12px)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,171,225,.5)}50%{box-shadow:0 0 0 12px rgba(0,171,225,0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.45}}
+.slide.on .a:not([data-s]),.slide.on .a[data-s].sh{animation:in .65s cubic-bezier(.2,.7,.2,1) var(--d,0ms) both}
+.slide.on .a.l:not([data-s]),.slide.on .a.l[data-s].sh{animation-name:inl}
+.slide.on .a.r:not([data-s]),.slide.on .a.r[data-s].sh{animation-name:inr}
+.slide.on .a.z:not([data-s]),.slide.on .a.z[data-s].sh{animation-name:inz}
+.slide.on .a.up:not([data-s]){animation-name:inu;animation-duration:.8s}
+.a[data-s]{opacity:0}
+.slide.on .g{animation:grow 1.1s cubic-bezier(.2,.7,.2,1) var(--d,0ms) both}
+.slide.on .a.static{animation:none;opacity:1}
+/* tarjetas */
+.card{background:#fff;border:1px solid #e3ebf1;border-radius:22px;padding:22px 24px;transition:scale .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
+.dark .card{background:#23282e;border-color:#2f363d;color:#fff}
+.card.dk{background:var(--ink);color:#fff;border-color:var(--ink)}
+.card.cy,.note.cy{background:var(--cy);border-color:var(--cy);color:var(--ink)}
+@media(hover:hover){.card:hover{scale:1.03;position:relative;z-index:4;box-shadow:0 0 0 3px rgba(0,171,225,.9),0 0 30px 6px rgba(0,171,225,.5)}}
+.card p{color:#55646f;font-size:18px}
+.dark .card p{color:rgba(255,255,255,.72)}
+.card.dk p,.card.cy p{color:inherit}
+.card.cy p{font-size:21px;margin-top:8px}
+.ic{flex:none}
+.ico{display:flex;gap:18px;align-items:flex-start}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g2 .card{min-height:172px;padding:28px 30px}.g2 .card p{font-size:20px}.g2 .card h3{font-size:25px}
+.note{border-radius:16px;padding:18px 26px;font-size:21px;margin-top:20px;line-height:1.4}
+.note.dk{background:var(--ink);color:#fff}
+.note.dk2{background:#23282e;color:#fff;border:1px solid #2f363d;margin-top:34px}
+.note.cy{margin-top:20px}
+/* pie */
+.foot{position:absolute!important;left:89px;right:89px;bottom:40px;display:flex;align-items:center;gap:14px;font-size:16px;color:#6a7883}
+.dark .foot{color:rgba(255,255,255,.55)}
+.cyan .foot{color:var(--ink)}
+.foot img{height:34px;width:34px;object-fit:contain}
+.foot .fl{flex:1}
+.foot .pn{margin-left:auto;font-size:16px}
+.foot img+.pn{margin-left:auto}
+/* 1 portada */
+.s1 .hero{position:absolute;left:89px;top:150px}
+.s1 h1{font-family:'Chunk',Georgia,serif;font-weight:400;margin:0;font-size:104px;line-height:1.05;color:#fff}
+.s1 h1.big{font-size:112px}
+.s1 .sub{font-size:28px;color:#c7d4de;margin-top:30px;line-height:1.4}
+.s1 .bar{width:84px;height:6px;border-radius:3px;background:var(--cy);margin:46px 0 22px;transform-origin:left}
+.s1 .meta{font-size:22px;font-weight:900}
+.s1 .by{position:absolute;left:89px;bottom:48px;color:rgba(255,255,255,.5);font-size:17px}
+.logoBig{position:absolute!important;right:110px;top:160px;width:430px;height:430px;display:flex;align-items:center;justify-content:center}
+.logoBig img{width:100%;position:relative;animation:float 4s ease-in-out infinite alternate}
+.logoBig .ring{position:absolute;inset:0;border-radius:50%;border:3px solid rgba(0,171,225,.55);animation:ring 4.8s ease-out infinite;animation-delay:var(--r)}
+.logoBig.sm{width:350px;height:350px;right:110px;top:190px}
+/* 3 */
+.cx{display:flex;gap:18px;align-items:stretch;margin-top:0}
+.cx .col{width:404px}
+.cx .mid{width:296px;display:flex;align-items:center;gap:0;flex:none;margin:0 -2px}
+.mini{padding:12px 18px;margin-bottom:12px;border-radius:14px}
+.mini h4{font-size:19px}
+.mini p{font-size:16px}
+.core{background:var(--cy);border-radius:18px;padding:22px 20px;color:var(--ink);width:272px;flex:none;box-shadow:0 0 40px rgba(0,171,225,.35)}
+.core .lb{font-size:13px;margin-bottom:10px}
+.core b{font-family:'Chunk',Georgia,serif;font-weight:400;font-size:30px;line-height:1.1;display:block;margin-bottom:12px}
+.core p{font-size:18px;line-height:1.35;color:var(--ink)}
+.arr{width:40px;flex:none}
+.arr svg{width:40px;height:24px;fill:none;stroke:var(--cy);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;margin:0 -10px}
+.mid .arr{width:20px}
+.foot2{font-size:21px;color:#e6eef5;margin-top:8px;position:relative}
+/* 4 */
+.s4 .eb{margin-top:0}
+.quote{font-family:'Chunk',Georgia,serif;font-weight:400;font-size:76px;line-height:1.06;margin:30px 0 22px;max-width:1100px}
+.quote .w{display:inline-block;margin-right:.08em}
+.lead{font-size:28px;margin-bottom:84px}
+.chain{display:flex;align-items:center;gap:14px}
+.pill{background:var(--ink);color:#fff;border-radius:999px;padding:14px 22px;font-weight:900;font-size:19px;white-space:nowrap}
+.chain .ar{width:36px;height:22px;fill:none;stroke:var(--ink);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}
+.ft4{color:var(--ink)}
+/* 5 */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pil{min-height:262px;padding:26px 24px}
+.pil .ic{margin-bottom:14px}
+.pil h3{font-size:22px;margin-bottom:8px}
+.stat{display:grid;grid-template-columns:repeat(4,1fr);background:var(--ink);color:#fff;border-radius:22px;margin-top:22px;padding:20px 28px;gap:16px}
+.stat b{display:block;font-family:'Gotham';font-weight:900;font-size:40px;color:var(--cy);line-height:1.1}
+.stat span{font-size:18px;color:#dfe8ef}
+/* 6 */
+.tl6{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:62px}
+.tl6 .rail,.tl12 .rail{position:absolute;left:0;right:0;height:4px;background:#2c343b}
+.tl6 .rail{top:27px}
+.tc{position:relative;padding-right:14px}
+.tc .num{width:56px;height:56px;border-radius:50%;background:var(--cy);color:var(--ink);font-weight:900;font-size:24px;display:flex;align-items:center;justify-content:center;position:relative;z-index:2;margin-bottom:30px}
+.tc .seg{position:absolute;top:27px;left:-50%;width:100%;height:4px;background:var(--cy);transform-origin:left;z-index:1;display:none}
+.tc:not(:first-child) .seg{display:block}
+.slide.on .tc.sh .seg{animation:grow .7s ease-out both}
+.tc h4{font-size:21px;margin-bottom:22px}
+.tc p{font-size:18px;color:rgba(255,255,255,.78);line-height:1.45}
+.slide.on .tc.sh .num{animation:pulse 1.4s ease-out 1}
+/* 7 */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.mod{padding:22px 20px}
+.mod .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.mod .top b{font-size:26px;color:var(--bl)}
+.mod h3{font-size:21px;margin:0}
+.tag{border-radius:999px;padding:5px 14px;font-size:15px;font-weight:900;color:#fff}
+.tag.p{background:var(--pu)}.tag.g{background:var(--gr);color:var(--ink)}.tag.b{background:var(--bl)}
+/* 8 */
+.lv .lvl{padding:20px 22px;min-height:196px}
+.dark .lvl .n{display:block;font-family:'Chunk',Georgia,serif;font-weight:400;font-size:44px;color:var(--cy);line-height:1;margin-bottom:8px}
+.lvl p{font-size:17px}
+.g2b{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+.g2b .card{min-height:124px}
+.g2b .lb{font-size:14px}
+.dark .card.cy p{color:var(--ink)}
+.g2b .card:not(.cy) p{font-size:21px;color:#fff;margin-top:8px}
+/* 9 */
+.s9{display:grid;grid-template-columns:1fr 362px;gap:22px}
+.rows{display:flex;flex-direction:column;gap:12px}
+.row9{display:flex;gap:30px;align-items:center;padding:14px 24px}
+.row9 .big{font-family:'Gotham';font-weight:900;font-size:46px;width:86px;line-height:1}
+.row9 h3{font-size:22px;margin:0}
+.row9 p{font-size:17px}
+.bar9{height:8px;border-radius:4px;background:#e6eef4;margin-top:10px;overflow:hidden;width:560px}
+.bar9 i{display:block;height:100%;width:var(--w);border-radius:4px;transform-origin:left}
+.side9{padding:26px 28px}
+.huge{display:block;font-weight:900;font-size:88px;line-height:1.05;margin:14px 0 16px}
+.side9 p{font-size:21px;line-height:1.4}
+/* 10 */
+.g4m{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.metric{padding:20px 22px;min-height:178px}
+.metric .m{display:block;font-weight:900;font-size:46px;color:var(--cy);line-height:1.1;margin-bottom:6px}
+.metric h3{font-size:21px;margin-bottom:5px}
+.metric p{font-size:17px}
+/* 11 */
+.g2c{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.big11{padding:22px 28px;min-height:324px}
+.big11 h3{font-size:30px;margin:10px 0 14px}
+.card.dk h3{color:#fff}
+.big11 ul{margin:0;padding-left:22px}
+.big11 li{font-size:20px;line-height:1.35;margin-bottom:6px}
+.ico2{display:flex;align-items:center;gap:16px;padding:16px 26px}
+/* 12 */
+.tl12{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:-6px}
+.tl12 .rail{top:316px}
+.hc{position:relative;text-align:center}
+.hcard{height:250px;text-align:left;padding:18px 18px;border-radius:18px}
+.hcard h4{font-size:21px;line-height:1.15;min-height:48px}
+.hcard .per{display:block;font-weight:900;color:var(--cy);font-size:19px;margin-bottom:8px}
+.hcard p{font-size:17px;line-height:1.35}
+.stem{width:3px;height:44px;background:#2c343b;margin:0 auto}
+.dia{width:22px;height:22px;border:3px solid var(--cy);transform:rotate(45deg);margin:5px auto 8px;background:var(--ink);position:relative;z-index:2}
+.dia.on{background:var(--cy)}
+.hc .seg{position:absolute;left:-50%;width:100%;top:325px;height:4px;background:var(--cy);transform-origin:left;display:none;margin-left:0}
+.hc:not(:first-child) .seg{display:block}
+.slide.on .hc.sh .seg{animation:grow .7s ease-out both}
+.slide.on .hc.sh .dia{animation:pulse 1.4s ease-out 1}
+.hc .day{display:block;font-size:28px;color:var(--cy);font-family:'Gotham';font-weight:900;margin:8px 0 4px}
+.hc .dd{display:block;font-size:19px;color:#d6e0e8;line-height:1.3;padding:0 10px}
+.hc .dd.bold{font-weight:900;color:#fff}
+/* 13 / 15 tablas */
+.s13,.s15{display:grid;gap:22px}
+.s13{grid-template-columns:772px 1fr}
+.s15{grid-template-columns:827px 1fr}
+.tbl{border:1px solid #d3dde5;background:#fff;align-self:start}
+.th,.tr{display:grid;grid-template-columns:278px 292px 1fr;font-size:19px}
+.s15 .th,.s15 .tr{grid-template-columns:330px 1fr}
+.th{background:var(--ink);color:#fff;font-weight:900}
+.th span,.tr span{padding:12px 14px;border-left:1px solid #d3dde5}
+.th span{border-left:0}
+.tr:nth-child(even){background:#e8eef3}
+.tr span:first-child{border-left:0}
+.tr{border-top:1px solid #d3dde5}
+.t2 .tr{font-size:18px}
+.side13{padding:24px 26px;align-self:start}
+.side13 .huge{font-size:76px;margin:12px 0 14px}
+.side13 p{font-size:21px;line-height:1.4;color:#fff}
+.side13 small,.side15 small{display:block;font-size:16px;color:rgba(255,255,255,.6);margin-top:14px;line-height:1.4}
+.side15{padding:22px 24px;align-self:start}
+.side15 .al{display:block;margin-bottom:8px}
+.side15 ul{margin:14px 0 8px;padding-left:22px}
+.side15 li{font-size:21px;margin-bottom:6px;line-height:1.3}
+.side15 .al svg{animation:blink 1.8s ease-in-out infinite}
+/* 14 */
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ben{padding:16px 18px;min-height:330px}
+.ben .ic{margin-bottom:12px}
+.ben h3{font-size:21px;margin-bottom:10px;min-height:50px}
+.ben ul{margin:0;padding-left:18px}
+.ben li{font-size:17px;line-height:1.35;margin-bottom:8px;color:rgba(255,255,255,.85)}
+/* 16 */
+.s16 .t16{font-size:46px;margin:14px 0 22px}
+.aps{display:flex;flex-direction:column;gap:16px;width:660px}
+.ap{display:flex;gap:16px;align-items:center}
+.ap b{flex:none;width:40px;height:40px;border-radius:50%;background:var(--cy);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:20px}
+.ap p{font-size:20px;line-height:1.35}
+/* controles */
+#ctl{position:fixed;right:16px;bottom:16px;z-index:50;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(27,27,27,.92);box-shadow:0 8px 24px rgba(0,0,0,.4);transition:opacity .4s;color:#fff;font-weight:900;font-size:14px}
+#ctl.hide{opacity:0;pointer-events:none}
+#ctl button{width:42px;height:42px;border-radius:50%;border:0;background:transparent;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+#ctl button:hover,#ctl button:focus-visible{background:var(--cy);color:var(--ink);outline:none}
+#ctl svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#cnt{padding:0 8px;min-width:64px;text-align:center}
+#bar{position:fixed;left:0;top:0;height:4px;width:100%;z-index:60;pointer-events:none}
+#bar i{display:block;height:100%;width:0;background:var(--cy);transition:width .4s}
+@media(prefers-reduced-motion:reduce){
+ .slide .a,.slide .g,.dark::before,.logoBig img,.logoBig .ring,.side15 .al svg{animation:none!important}
+ .a{opacity:1!important}
+ .g{transform:none!important}
+}
+</style></head>
+<body>
+<div id="stage">
+<section class="slide dark s1">
+<div class="hero">
+ <div class="eb a" style="--d:200ms">PRESENTACIÓN A LA DIRECTIVA</div>
+ <h1 class="a" style="--d:310ms">Proyecto</h1>
+ <h1 class="a big" style="--d:420ms">HUELLA</h1>
+ <p class="sub a" style="--d:530ms">Programa de Excelencia en Servicio y<br>Experiencia de Marca</p>
+ <div class="bar a" style="--d:640ms"></div>
+ <p class="meta a" style="--d:750ms">Global Burger · Octubre 2026</p>
+</div>
+<p class="by a" style="--d:860ms">Elaborado por Luna y Johandy</p>
+<div class="logoBig a z" style="--d:420ms"><i class="ring" style="--r:0s"></i><i class="ring" style="--r:1.6s"></i><i class="ring" style="--r:3.2s"></i><img src="assets/logo-celeste.png" alt="Global Burger"></div>
+</section>
+<section class="slide light"><div class="eb a" style="--d:200ms">EL PUNTO DE PARTIDA</div><h2 class="a" style="--d:310ms">La atención cambia según quién atiende</h2>
+<div class="g2"><div class="card a ico" style="--d:520ms"><svg class="ic" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#0070e2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><h3>Atención tardía o ausente</h3><p>Clientes que alzan la voz o hacen señas para ser atendidos.</p></div></div><div class="card a ico" style="--d:680ms"><svg class="ic" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#0070e2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 5"/></svg><div><h3>Personal concentrado en la barra</h3><p>Se pierde el control visual de las mesas por periodos prolongados.</p></div></div><div class="card a ico" style="--d:840ms"><svg class="ic" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#0070e2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h7a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H3z"/><path d="M21 5h-7a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h7z"/></svg><div><h3>Conocimiento parcial del menú</h3><p>Se limita la recomendación, la venta sugestiva y la resolución de dudas.</p></div></div><div class="card a ico" style="--d:1000ms"><svg class="ic" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#0070e2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="5" width="4" height="15" rx="1"/><rect x="17" y="9" width="4" height="11" rx="1"/></svg><div><h3>Sin medición individual</h3><p>Ni el buen desempeño ni el deficiente son visibles para la gerencia.</p></div></div></div>
+<div class="note dk a" style="--d:1320ms">Alcance: <b class="c">2 turnos</b> (4 meseras de día y 5 de noche) y <b class="c">3 áreas</b>: sala, barra y caja.</div>
+<div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="pn">02 / 16</span></div></section>
+<section class="slide dark"><div class="eb a" style="--d:200ms">CAUSA Y EFECTO</div><h2 class="a" style="--d:310ms">Cuatro causas de gestión, cuatro efectos</h2>
+<div class="cx">
+ <div class="col"><div class="lbl a" style="--d:420ms">CAUSAS RAÍZ</div><div class="card mini a l" data-s="1" style="--d:0ms"><h4>Proceso sin diseño</h4><p>Sin zonas ni ronda de mesas</p></div><div class="card mini a l" data-s="1" style="--d:130ms"><h4>Formación insuficiente</h4><p>Menú y venta sugestiva</p></div><div class="card mini a l" data-s="1" style="--d:260ms"><h4>Sin medición individual</h4><p>Ni retroalimentación</p></div><div class="card mini a l" data-s="1" style="--d:390ms"><h4>Incentivos sin metas</h4><p>No ligados a la conducta de servicio</p></div></div>
+ <div class="mid">
+   <div class="arr a" data-s="2" style="--d:0ms"><svg viewBox="0 0 40 24"><path d="M2 12h28M22 4l12 8-12 8"/></svg></div>
+   <div class="core a z" data-s="2" style="--d:200ms"><span class="lb">PROBLEMA CENTRAL</span><b>Servicio irregular en sala</b><p>Depende de cada mesera, de cada turno y de la carga del momento.</p></div>
+   <div class="arr a" data-s="3" style="--d:0ms"><svg viewBox="0 0 40 24"><path d="M2 12h28M22 4l12 8-12 8"/></svg></div>
+ </div>
+ <div class="col"><div class="lbl a" data-s="3" style="--d:0ms">CONSECUENCIAS</div><div class="card mini a r" data-s="3" style="--d:0ms"><h4>Experiencia inconsistente</h4><p>Esperas y mesas sin atender</p></div><div class="card mini a r" data-s="3" style="--d:130ms"><h4>Venta incremental perdida</h4><p>Menor ticket promedio</p></div><div class="card mini a r" data-s="3" style="--d:260ms"><h4>Menor recurrencia</h4><p>Menos regreso y recomendación</p></div><div class="card mini a r" data-s="3" style="--d:390ms"><h4>Riesgo de rotación</h4><p>Desmotivación del personal</p></div></div>
+</div>
+<p class="foot2 a" data-s="3" style="--d:700ms">Son fallas del sistema, no de las personas: corregir el proceso es más eficaz.</p>
+<div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="fl">Proyecto HUELLA</span><span class="pn">03 / 16</span></div></section>
+<section class="slide cyan s4">
+<div class="eb a" style="--d:200ms">PRINCIPIO RECTOR</div>
+<h1 class="quote"><span class="w a" style="--d:300ms">El</span> <span class="w a" style="--d:440ms">cliente</span> <span class="w a" style="--d:580ms">recuerda</span> <span class="w a" style="--d:720ms">cómo</span> <span class="w a" style="--d:860ms">lo</span> <span class="w a" style="--d:1000ms">hicimos</span> <span class="w a" style="--d:1140ms">sentir.</span></h1>
+<p class="lead a" style="--d:1900ms">La rentabilidad es consecuencia de ese recuerdo.</p>
+<div class="lbl ink a" style="--d:2000ms">LA CADENA DEL SERVICIO</div>
+<div class="chain"><span class="pill a z" style="--d:2200ms">Equipo preparado</span><svg class="ar a" style="--d:2460ms" viewBox="0 0 40 24"><path d="M2 12h28M22 4l12 8-12 8"/></svg><span class="pill a z" style="--d:2720ms">Mejor servicio</span><svg class="ar a" style="--d:2980ms" viewBox="0 0 40 24"><path d="M2 12h28M22 4l12 8-12 8"/></svg><span class="pill a z" style="--d:3240ms">Cliente satisfecho</span><svg class="ar a" style="--d:3500ms" viewBox="0 0 40 24"><path d="M2 12h28M22 4l12 8-12 8"/></svg><span class="pill a z" style="--d:3760ms">Lealtad y rentabilidad</span></div>
+<div class="foot ft4"><span class="fl">Proyecto HUELLA · Global Burger</span><span class="pn">04 / 16</span></div>
+</section>
+<section class="slide light"><div class="eb a" style="--d:200ms">LA PROPUESTA</div><h2 class="a" style="--d:310ms">Un programa en cuatro pilares</h2>
+<div class="g4"><div class="card a pil" style="--d:520ms"><svg class="ic" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0070e2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><h3>Estandarización del servicio</h3><p>Zonas por mesera, ronda de mesas y reglas de barra.</p></div><div class="card a pil" style="--d:680ms"><svg class="ic" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#7000e2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></svg><h3>Formación por competencias</h3><p>Nueve módulos para dominar producto, protocolo y venta.</p></div><div class="card a pil" style="--d:840ms"><svg class="ic" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#01be7d" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><h3>Incentivos por desempeño</h3><p>Bono interno y premios de Polar ligados a resultados.</p></div><div class="card a pil" style="--d:1000ms"><svg class="ic" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0070e2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="5" width="4" height="15" rx="1"/><rect x="17" y="9" width="4" height="11" rx="1"/></svg><h3>Medición con evidencia</h3><p>Cuadro de mando por mesera, encuesta QR y cliente incógnito.</p></div></div>
+<div class="stat dk a" style="--d:1320ms"><div><b class="cnt" data-to="90" data-pre="" data-suf="" data-delay="1300">0</b><span>días de programa</span></div><div><b class="cnt" data-to="9" data-pre="" data-suf="" data-delay="1450">0</b><span>meseras en 2 turnos</span></div><div><b class="cnt" data-to="12" data-pre="" data-suf=" h" data-delay="1600">0 h</b><span>de formación por persona</span></div><div><b class="cnt" data-to="0" data-pre="$" data-suf="" data-delay="1750">$0</b><span>en consultoría externa</span></div></div>
+<div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="pn">05 / 16</span></div></section>
+<section class="slide dark"><div class="eb a" style="--d:200ms">ESTANDARIZAMOS EL SERVICIO</div><h2 class="a" style="--d:310ms">Cinco momentos de verdad en cada visita</h2>
+<div class="tl6"><div class="rail"></div><div class="tc a" data-s="1" style="--d:0ms"><div class="seg"></div><div class="num">1</div><h4>Bienvenida</h4><p>Saludo en los primeros 10 segundos, con contacto visual.</p></div><div class="tc a" data-s="2" style="--d:0ms"><div class="seg"></div><div class="num">2</div><h4>Primera atención</h4><p>Menú y bebida ofrecida en 2 minutos o menos.</p></div><div class="tc a" data-s="3" style="--d:0ms"><div class="seg"></div><div class="num">3</div><h4>Durante el consumo</h4><p>Ronda de zona cada 3 a 5 minutos y oferta de postre.</p></div><div class="tc a" data-s="4" style="--d:0ms"><div class="seg"></div><div class="num">4</div><h4>Pago y despedida</h4><p>Cuenta ágil, despedida con invitación a volver y código QR.</p></div><div class="tc a" data-s="5" style="--d:0ms"><div class="seg"></div><div class="num">5</div><h4>Después de la visita</h4><p>Seguimiento a quejas en 24 horas y reconocimiento al cliente frecuente.</p></div></div>
+<div class="note dk2 a" data-s="5" style="--d:900ms">En sala, además: <b class="c">zonas por mesera</b> con rotación quincenal, reglas de barra y reunión de 5 minutos al abrir y cerrar el turno.</div>
+<div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="fl">Proyecto HUELLA</span><span class="pn">06 / 16</span></div></section>
+<section class="slide light"><div class="eb a" style="--d:200ms">PROGRAMA FORMATIVO</div><h2 class="a" style="--d:310ms">Nueve módulos, 12 horas por persona</h2>
+<div class="g3"><div class="card a mod" style="--d:420ms"><div class="top"><b>01</b><span class="tag p">Coach interno</span></div><h3>Cultura de servicio y marca</h3></div><div class="card a mod" style="--d:530ms"><div class="top"><b>02</b><span class="tag g">Gerencia</span></div><h3>Conocimiento del portafolio</h3></div><div class="card a mod" style="--d:640ms"><div class="top"><b>03</b><span class="tag b">Mercadeo de Polar</span></div><h3>Protocolo y etiqueta en sala</h3></div><div class="card a mod" style="--d:750ms"><div class="top"><b>04</b><span class="tag p">Coach interno</span></div><h3>Comunicación efectiva</h3></div><div class="card a mod" style="--d:860ms"><div class="top"><b>05</b><span class="tag b">Mercadeo de Polar</span></div><h3>Venta consultiva</h3></div><div class="card a mod" style="--d:970ms"><div class="top"><b>06</b><span class="tag p">Coach interno</span></div><h3>Gestión de quejas</h3></div><div class="card a mod" style="--d:1080ms"><div class="top"><b>07</b><span class="tag b">Mercadeo de Polar</span></div><h3>Clientes por segmento</h3></div><div class="card a mod" style="--d:1190ms"><div class="top"><b>08</b><span class="tag p">Coach interno</span></div><h3>Inteligencia emocional y equipo</h3></div><div class="card a mod" style="--d:1300ms"><div class="top"><b>09</b><span class="tag p">Coach interno</span></div><h3>Marca personal y carrera</h3></div></div>
+<p class="txt a" style="--d:1520ms">Sesiones de 60 a 120 minutos, repetidas por turno y <b>dentro del horario pagado</b>. Cierra con certificación interna de mesera Global Burger.</p>
+<div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="pn">07 / 16</span></div></section>
+<section class="slide dark"><div class="eb a" style="--d:200ms">CÓMO SE MIDE</div><h2 class="a" style="--d:310ms">Evaluación en cuatro niveles</h2>
+<div class="g4 lv"><div class="card a up lvl" style="--d:600ms"><b class="n">1</b><h3>Reacción</h3><p>Encuesta de dos preguntas al cerrar cada módulo.</p></div><div class="card a up lvl" style="--d:800ms"><b class="n">2</b><h3>Aprendizaje</h3><p>Prueba de menú y simulaciones de venta y de queja.</p></div><div class="card a up lvl" style="--d:1000ms"><b class="n">3</b><h3>Conducta</h3><p>Observación en sala con rúbrica, cliente incógnito y planilla de caja.</p></div><div class="card a up lvl" style="--d:1200ms"><b class="n">4</b><h3>Resultados</h3><p>Ventas del sistema INVU, encuesta QR, quejas, eNPS y rotación.</p></div></div>
+<div class="g2b">
+ <div class="card cy a l" style="--d:1420ms"><span class="lb">TRES FUENTES QUE SE CRUZAN</span><p>Lo que registra el sistema, lo que dice el cliente y lo que se observa en sala.</p></div>
+ <div class="card a r" style="--d:1580ms"><span class="lb c">LÍNEA BASE Y CORTES</span><p>Medición en la semana 0 y cortes en los días 30, 60 y 90.</p></div>
+</div>
+<div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="fl">Proyecto HUELLA</span><span class="pn">08 / 16</span></div></section>
+<section class="slide light"><div class="eb a" style="--d:200ms">CUADRO DE MANDO POR MESERA</div><h2 class="a" style="--d:310ms">100 puntos que premian vender bien, no solo vender</h2>
+<div class="s9"><div class="rows"><div class="card a row9" style="--d:540ms"><b class="big" style="color:#0070e2"><span class="cnt" data-to="40" data-delay="500">0</span></b>
+<div><h3>Comercial</h3><p>Adjunción de postres y bebidas · producto objetivo</p><div class="bar9"><i class="g" style="--w:100.0%;--d:900ms;background:#0070e2"></i></div></div></div><div class="card a row9" style="--d:710ms"><b class="big" style="color:#7000e2"><span class="cnt" data-to="30" data-delay="670">0</span></b>
+<div><h3>Cliente</h3><p>CSAT atribuido · cliente incógnito</p><div class="bar9"><i class="g" style="--w:75.0%;--d:1070ms;background:#7000e2"></i></div></div></div><div class="card a row9" style="--d:880ms"><b class="big" style="color:#01be7d"><span class="cnt" data-to="20" data-delay="840">0</span></b>
+<div><h3>Proceso</h3><p>Primera atención · cumplimiento del protocolo</p><div class="bar9"><i class="g" style="--w:50.0%;--d:1240ms;background:#01be7d"></i></div></div></div><div class="card a row9" style="--d:1050ms"><b class="big" style="color:#0070e2"><span class="cnt" data-to="10" data-delay="1010">0</span></b>
+<div><h3>Equipo y aprendizaje</h3><p>Prueba de menú · trabajo en equipo y presentación</p><div class="bar9"><i class="g" style="--w:25.0%;--d:1410ms;background:#0070e2"></i></div></div></div></div>
+<div class="card dk a z side9" style="--d:900ms"><span class="lb c">BONO DE $20</span><b class="huge"><span class="cnt" data-to="70" data-suf="+" data-delay="1000">0+</span></b>
+<p>puntos para activarlo. Los pesos se revisan tras la primera quincena para que entre 60% y 70% del equipo pueda alcanzarlo.</p></div></div>
+<div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="pn">09 / 16</span></div></section>
+<section class="slide dark"><div class="eb a" style="--d:200ms">METAS A 90 DÍAS</div><h2 class="a" style="--d:310ms">Lo que esperamos lograr</h2>
+<div class="g4m"><div class="card a metric" style="--d:460ms"><b class="m"><span class="cnt" data-to="8" data-dec="0" data-pre="+" data-suf="%" data-delay="500">+0%</span></b><h3>Ticket promedio</h3><p>Meta ampliada: +12%. Día 90.</p></div><div class="card a metric" style="--d:590ms"><b class="m"><span class="cnt" data-to="10" data-dec="0" data-pre="+" data-suf="" data-delay="630">+0</span></b><h3>Puntos de adjunción</h3><p>Postres y bebidas. Día 60.</p></div><div class="card a metric" style="--d:720ms"><b class="m"><span class="cnt" data-to="25" data-dec="0" data-pre="+" data-suf="%" data-delay="760">+0%</span></b><h3>Producto objetivo</h3><p>Unidades del producto de Polar. Día 45.</p></div><div class="card a metric" style="--d:850ms"><b class="m"><span class="cnt" data-to="4.5" data-dec="1" data-pre="" data-suf="" data-delay="890">0</span></b><h3>CSAT sobre 5</h3><p>NPS +15 puntos. Día 90.</p></div><div class="card a metric" style="--d:980ms"><b class="m"><span class="cnt" data-to="90" data-dec="0" data-pre="" data-suf="%" data-delay="1020">0%</span></b><h3>Mesas en 2 minutos</h3><p>Primera atención. Día 45.</p></div><div class="card a metric" style="--d:1110ms"><b class="m"><span class="cnt" data-to="9" data-dec="0" data-pre="" data-suf="/9" data-delay="1150">0/9</span></b><h3>Prueba de menú</h3><p>Meseras con 90% o más. Día 30.</p></div><div class="card a metric" style="--d:1240ms"><b class="m"><span class="cnt" data-to="10" data-dec="0" data-pre="" data-suf="%" data-delay="1280">0%</span></b><h3>Segunda visita</h3><p>Canje entre quienes responden la encuesta. Día 90.</p></div><div class="card a metric" style="--d:1370ms"><b class="m"><span class="cnt" data-to="0" data-dec="0" data-pre="" data-suf="" data-delay="1410">0</span></b><h3>Renuncias voluntarias</h3><p>eNPS +15 puntos. Día 90.</p></div></div>
+<p class="txt dim a" style="--d:1630ms">Metas de planificación: se calibran con la línea base medida en la semana 0.</p>
+<div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="fl">Proyecto HUELLA</span><span class="pn">10 / 16</span></div></section>
+<section class="slide light"><div class="eb a" style="--d:200ms">ALIANZA CON EMPRESAS POLAR</div><h2 class="a" style="--d:310ms">Alianza Impulso Diamante</h2>
+<div class="g2c">
+ <div class="card dk a l big11" style="--d:420ms"><span class="lb c">PILOTO DE 30 DÍAS</span><h3>Global Burger se compromete a</h3>
+  <ul><li>Una meta de +25% en la rotación del producto objetivo</li><li>Capacitar a todo el personal de sala en portafolio y venta sugestiva</li><li>Entregar un informe con gráficas comparativas y datos verificables</li><li>Mantener la continuidad con el contrato de fidelidad</li></ul></div>
+ <div class="card a r big11" style="--d:640ms"><span class="lb b">A CAMBIO</span><h3>Empresas Polar aporta</h3>
+  <ul><li>Un facilitador de mercadeo para tres módulos</li><li>Premios para las tres mejores meseras de cada quincena</li><li>Un evento de premiación al cierre del programa</li><li>Equipos de frío con cantidad, modelo y fecha por escrito</li></ul></div>
+</div>
+<div class="note cy a ico2" style="--d:1580ms"><svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span>Verificación compartida: las ventas del sistema INVU se contrastan con los despachos del franquiciado.</span></div>
+<div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="pn">11 / 16</span></div></section>
+<section class="slide dark"><div class="eb a" style="--d:200ms">CALENDARIO</div><h2 class="a" style="--d:310ms">Un calendario de 90 días con cinco hitos</h2><div class="tl12"><div class="rail"></div><div class="hc a" data-s="1" style="--d:0ms"><div class="seg"></div>
+<div class="card hcard"><h4>Preparación</h4><span class="per">Semana 0</span><p>Línea base de 7 días y acuerdos escritos con coach y Polar.</p></div><div class="stem"></div><div class="dia"></div>
+<b class="day">Día 0</b><span class="dd">Línea base lista</span></div><div class="hc a" data-s="2" style="--d:0ms"><div class="seg"></div>
+<div class="card hcard"><h4>Orden y formación</h4><span class="per">Días 1 a 14</span><p>Zonas, reglas de barra y módulos 1 a 5.</p></div><div class="stem"></div><div class="dia"></div>
+<b class="day">Día 15</b><span class="dd">Arranca la meta del producto objetivo</span></div><div class="hc a" data-s="3" style="--d:0ms"><div class="seg"></div>
+<div class="card hcard"><h4>Piloto con Polar</h4><span class="per">Días 15 a 45</span><p>Meta del producto objetivo, planilla, QR y módulos 6 a 9.</p></div><div class="stem"></div><div class="dia"></div>
+<b class="day">Día 45</b><span class="dd">Informe a Polar</span></div><div class="hc a" data-s="4" style="--d:0ms"><div class="seg"></div>
+<div class="card hcard"><h4>Neveras y ajustes</h4><span class="per">Días 46 a 60</span><p>Informe a Polar y compromiso escrito de equipos de frío.</p></div><div class="stem"></div><div class="dia on"></div>
+<b class="day">Día 60</b><span class="dd bold">Neveras confirmadas por escrito</span></div><div class="hc a" data-s="5" style="--d:0ms"><div class="seg"></div>
+<div class="card hcard"><h4>Consolidación</h4><span class="per">Días 61 a 90</span><p>Evaluación final, certificación y premiación.</p></div><div class="stem"></div><div class="dia"></div>
+<b class="day">Día 90</b><span class="dd">Evaluación final y premiación</span></div></div><div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="fl">Proyecto HUELLA</span><span class="pn">12 / 16</span></div></section>
+<section class="slide light"><div class="eb a" style="--d:200ms">INVERSIÓN</div><h2 class="a" style="--d:310ms">El costo se concentra en el bono</h2>
+<div class="s13"><div class="tbl"><div class="th a" style="--d:500ms"><span>Concepto</span><span>Costo estimado</span><span>Lo cubre</span></div><div class="tr a" style="--d:650ms"><span>Coach interno</span><span>Sin costo adicional</span><span>Global Burger</span></div><div class="tr a" style="--d:800ms"><span>Mercadeo de Polar</span><span>Sin costo</span><span>Polar</span></div><div class="tr a" style="--d:950ms"><span>Bono de desempeño</span><span>Hasta $1.080 en 90 días</span><span>Global Burger</span></div><div class="tr a" style="--d:1100ms"><span>Premios y evento</span><span>Por definir</span><span>Polar</span></div><div class="tr a" style="--d:1250ms"><span>Materiales y degustaciones</span><span>Gasto menor, por cotizar</span><span>Global Burger</span></div><div class="tr a" style="--d:1400ms"><span>Horas de formación</span><span>12 h por persona, en jornada pagada</span><span>Global Burger</span></div></div>
+<div class="card dk a z side13" style="--d:800ms"><span class="lb c">PUNTO DE EQUILIBRIO</span><b class="huge"><span class="cnt" data-to="1800" data-pre="$" data-delay="1000">$0</span></b>
+<p>en ventas adicionales cubren el techo del bono, con un margen ilustrativo de 60%: unos $20 diarios.</p><small>Con 60% a 70% de logro, el bono cuesta entre $648 y $756.</small></div></div>
+<div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="pn">13 / 16</span></div></section>
+<section class="slide dark"><div class="eb a" style="--d:200ms">BENEFICIOS</div><h2 class="a" style="--d:310ms">Gana cada parte de la cadena</h2>
+<div class="g5"><div class="card a ben" style="--d:500ms"><svg class="ic" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#00abe1" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><h3>Global Burger</h3><ul><li>Más ticket y recurrencia</li><li>Menor rotación y costo de reemplazo</li><li>Base para un modelo de franquicia</li></ul></div><div class="card a ben" style="--d:650ms"><svg class="ic" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#a56bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><h3>Franquiciado de Polar</h3><ul><li>Más volumen del producto objetivo</li><li>Caso de éxito en un cliente diamante</li><li>Mejor posición ante sus directivos</li></ul></div><div class="card a ben" style="--d:800ms"><svg class="ic" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#4aa3ff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><h3>Empresas Polar</h3><ul><li>Marca ejecutada en el punto de venta</li><li>Personal que recomienda sus productos</li><li>Modelo replicable en otros clientes</li></ul></div><div class="card a ben" style="--d:950ms"><svg class="ic" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#01be7d" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></svg><h3>Meseras</h3><ul><li>Formación certificada</li><li>Bono, premios y reconocimiento</li><li>Ruta de crecimiento profesional</li></ul></div><div class="card a ben" style="--d:1100ms"><svg class="ic" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#00abe1" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11v9H4v-9zM7 11l4-8c1.5 0 2.5 1 2.5 2.5V9h5.5a2 2 0 0 1 2 2.3l-1.2 7a2 2 0 0 1-2 1.7H7"/></svg><h3>Clientes</h3><ul><li>Atención oportuna y cálida</li><li>Recomendaciones útiles</li><li>Un recuerdo positivo de la visita</li></ul></div></div>
+<div class="note cy a" style="--d:1500ms">Los beneficios se concretan si cada parte cumple su aporte: la gerencia sostiene el orden y la medición, Polar entrega los recursos y el equipo aplica lo aprendido.</div>
+<div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="fl">Proyecto HUELLA</span><span class="pn">14 / 16</span></div></section>
+<section class="slide light"><div class="eb a" style="--d:200ms">RIESGOS Y MITIGACIÓN</div><h2 class="a" style="--d:310ms">Riesgos identificados y controlados</h2>
+<div class="s15"><div class="tbl t2"><div class="th a" style="--d:500ms"><span>Riesgo</span><span>Mitigación</span></div><div class="tr a" style="--d:650ms"><span>El coach interno no cumple su calendario</span><span>Calendario y entregables por escrito; la coordinación prepara el material.</span></div><div class="tr a" style="--d:800ms"><span>Polar no confirma premios o equipos de frío</span><span>Alcance firmado e informe en el día 45; alternativas: comodato o entrega por fases.</span></div><div class="tr a" style="--d:950ms"><span>Venta insistente que incomoda al cliente</span><span>Entrenar la oferta como ayuda y restar puntos por insistencia.</span></div><div class="tr a" style="--d:1100ms"><span>El fin de año distorsiona la comparación</span><span>Implementación escalonada entre turnos y comparación con el año anterior.</span></div><div class="tr a" style="--d:1250ms"><span>Implicaciones laborales del bono</span><span>Revisión de RR. HH. o asesor laboral y comunicación escrita previa.</span></div></div>
+<div class="card dk a z side15" style="--d:800ms"><span class="al"><svg class="ic" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#00abe1" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg></span><span class="lb c">SEÑALES DE ALERTA</span>
+<ul><li>CSAT por debajo de 4,0</li><li>Dos quejas graves en una semana</li><li>Ticket promedio bajo la línea base</li></ul>
+<small>Activan una revisión inmediata con supervisión, coach y gerencia.</small></div></div>
+<div class="foot"><img src="assets/logo-celeste.png" alt="Global Burger"><span class="pn">15 / 16</span></div></section>
+<section class="slide dark s16">
+<div class="eb a" style="--d:200ms">SOLICITUD DE APROBACIÓN</div>
+<h2 class="a t16" style="--d:310ms">Autorización para iniciar el<br>Proyecto HUELLA</h2>
+<div class="aps"><div class="ap a l" style="--d:600ms"><b>1</b><p>Ejecutar el programa durante 90 días, con una semana previa de línea base.</p></div><div class="ap a l" style="--d:800ms"><b>2</b><p>Dictar la formación dentro del horario laboral remunerado.</p></div><div class="ap a l" style="--d:1000ms"><b>3</b><p>Condicionar el bono de $20 al cuadro de mando, previa revisión laboral.</p></div><div class="ap a l" style="--d:1200ms"><b>4</b><p>Presentar la Alianza Impulso Diamante al franquiciado y a los directivos de Polar.</p></div><div class="ap a l" style="--d:1400ms"><b>5</b><p>Designar a la persona coordinadora y al supervisor responsable de la observación.</p></div></div>
+<div class="logoBig sm a z" style="--d:420ms"><i class="ring" style="--r:0s"></i><i class="ring" style="--r:1.6s"></i><i class="ring" style="--r:3.2s"></i><img src="assets/logo-celeste.png" alt="Global Burger"></div>
+<div class="foot"><img src="assets/logo-celeste.png" alt=""><span class="fl">Proyecto HUELLA · Global Burger · Elaborado por Luna y Johandy</span><span class="pn">16 / 16</span></div>
+</section>
+</div>
+<div id="ctl" aria-label="Controles">
+  <button id="bp" aria-label="Anterior" title="Anterior (←)"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <span id="cnt">1 / 16</span>
+  <button id="bn" aria-label="Siguiente" title="Siguiente (→)"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button id="bh" aria-label="Ir al inicio" title="Inicio"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></button>
+  <button id="bf" aria-label="Pantalla completa" title="Pantalla completa (F)"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</div>
+<div id="bar"><i></i></div>
+<script>(function(){
+var stage=document.getElementById('stage');
+var slides=[].slice.call(document.querySelectorAll('.slide'));
+var N=slides.length,cur=-1,step=0,token=0;
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+var ctl=document.getElementById('ctl'),cnt=document.getElementById('cnt'),bar=document.querySelector('#bar i');
+
+function fit(){
+  var s=Math.min(innerWidth/1334,innerHeight/750);
+  stage.style.transform='translate(-'+(667*s)+'px,-'+(375*s)+'px) scale('+s+')';
+}
+addEventListener('resize',fit);fit();
+
+function maxStep(s){var m=0;[].forEach.call(s.querySelectorAll('[data-s]'),function(e){m=Math.max(m,+e.dataset.s)});return reduce?0:m}
+function fmt(v,dec){
+  var t=v.toFixed(dec);var p=t.split('.');
+  p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+  return p.join(',');
+}
+function setCount(e,v){
+  var dec=+(e.dataset.dec||0);
+  e.textContent=(e.dataset.pre||'')+fmt(v,dec)+(e.dataset.suf||'');
+}
+function counters(s,final){
+  var list=[].slice.call(s.querySelectorAll('.cnt'));
+  var my=++token;
+  list.forEach(function(e){
+    var to=+e.dataset.to;
+    if(final||reduce){setCount(e,to);return}
+    setCount(e,0);
+    var delay=+(e.dataset.delay||400),dur=1400,t0=null;
+    setTimeout(function(){
+      function tick(ts){
+        if(my!==token)return;
+        if(!t0)t0=ts;
+        var k=Math.min(1,(ts-t0)/dur);
+        k=1-Math.pow(1-k,3);
+        setCount(e,to*k);
+        if(k<1)requestAnimationFrame(tick);else setCount(e,to);
+      }
+      if(my===token)requestAnimationFrame(tick);
+    },delay);
+  });
+}
+function show(i,back){
+  if(i<0||i>=N)return;
+  if(cur>=0){var o=slides[cur];o.classList.remove('on');[].forEach.call(o.querySelectorAll('.sh'),function(e){e.classList.remove('sh')})}
+  cur=i;var s=slides[i];
+  // reiniciar animaciones
+  void s.offsetWidth;
+  s.classList.add('on');
+  step=0;
+  var ms=maxStep(s);
+  if(back||reduce){step=ms;[].forEach.call(s.querySelectorAll('[data-s]'),function(e){e.classList.add('sh');e.style.animation='none';e.style.opacity=1})}
+  else{[].forEach.call(s.querySelectorAll('[data-s]'),function(e){e.style.animation='';e.style.opacity=''})}
+  counters(s,back);
+  cnt.textContent=(i+1)+' / '+N;
+  bar.style.width=((i+1)/N*100)+'%';
+  try{history.replaceState(null,'','#'+(i+1))}catch(e){}
+}
+function reveal(k){
+  var s=slides[cur];
+  [].forEach.call(s.querySelectorAll('[data-s="'+k+'"]'),function(e){e.classList.add('sh')});
+}
+function next(){
+  var s=slides[cur];
+  if(step<maxStep(s)){step++;reveal(step);return}
+  if(cur<N-1)show(cur+1,false);
+}
+function prev(){
+  var s=slides[cur];
+  if(step>0&&!reduce){
+    [].forEach.call(s.querySelectorAll('[data-s="'+step+'"]'),function(e){e.classList.remove('sh')});
+    step--;return;
+  }
+  if(cur>0)show(cur-1,true);
+}
+function fs(){
+  var d=document;
+  if(d.fullscreenElement){d.exitFullscreen&&d.exitFullscreen()}
+  else if(d.documentElement.requestFullscreen){d.documentElement.requestFullscreen()}
+}
+document.getElementById('bn').onclick=function(e){e.stopPropagation();next()};
+document.getElementById('bp').onclick=function(e){e.stopPropagation();prev()};
+document.getElementById('bh').onclick=function(e){e.stopPropagation();show(0,false)};
+document.getElementById('bf').onclick=function(e){e.stopPropagation();fs()};
+document.addEventListener('keydown',function(e){
+  var k=e.key;
+  if(k==='ArrowRight'||k==='ArrowDown'||k==='PageDown'||k===' '||k==='Enter'){e.preventDefault();next()}
+  else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'||k==='Backspace'){e.preventDefault();prev()}
+  else if(k==='Home')show(0,false);
+  else if(k==='End')show(N-1,true);
+  else if(k==='f'||k==='F')fs();
+});
+stage.addEventListener('click',function(e){
+  var x=e.clientX/innerWidth;
+  if(x<.18)prev();else next();
+});
+var tx=null;
+addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',function(e){
+  if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;tx=null;
+  if(Math.abs(dx)>50){if(dx<0)next();else prev()}
+},{passive:true});
+var hideT;
+function wake(){ctl.classList.remove('hide');clearTimeout(hideT);hideT=setTimeout(function(){ctl.classList.add('hide')},3000)}
+addEventListener('mousemove',wake);addEventListener('touchstart',wake,{passive:true});addEventListener('keydown',wake);
+wake();
+var start=parseInt((location.hash||'').slice(1),10);
+function go(){show(isNaN(start)?0:Math.min(N,Math.max(1,start))-1,false)}
+(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(go);
+})();
+</script>
+</body></html>
